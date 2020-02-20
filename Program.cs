@@ -21,21 +21,18 @@ namespace Bank
       Console.WriteLine("Welcome to First Bank of Suncoast!");
 
       var accounts = new List<Account>();
+      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+      accounts.Add(new Account { AccountType = "Savings", Amount = 0 });
 
       var reader = new StreamReader("accounts.csv");
       var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
       accounts = csvReader.GetRecords<Account>().ToList();
 
+      AccountsManager.DisplayAccounts(accounts);
+
       var isRunning = true;
       while (isRunning)
       {
-        foreach (var Account in accounts)
-        {
-          Console.WriteLine($"Your current checking balance:{Account.Checking}");
-          Console.WriteLine($"Your current savings balance:{Account.Saving}");
-        }
-
-
         Console.WriteLine("would you like to (A)dd (W)ithdraw (T)ransfer or (Q)uit?");
         var input = Console.ReadLine().ToLower();
 

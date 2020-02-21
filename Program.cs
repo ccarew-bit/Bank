@@ -19,10 +19,10 @@ namespace Bank
     static void Main(string[] args)
     {
       Console.WriteLine("Welcome to First Bank of Suncoast!");
-
+      var accountsManager = new AccountsManager();
       var accounts = new List<Account>();
-      accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
-      accounts.Add(new Account { AccountType = "Savings", Amount = 0 });
+      // accounts.Add(new Account { AccountType = "Checking", Amount = 0 });
+      // accounts.Add(new Account { AccountType = "Savings", Amount = 0 });
 
       var reader = new StreamReader("accounts.csv");
       var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
@@ -42,11 +42,17 @@ namespace Bank
           var add = Console.ReadLine().ToLower();
           if (add == "c")
           {
-
+            Console.WriteLine("how much would you like to deposit into your checking account?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Adding("Checking", deposit);
+            SaveAccounts(accounts);
           }
           else if (add == "s")
           {
-
+            Console.WriteLine("how much would you like to deposit into your savings account?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Adding("Savings", deposit);
+            SaveAccounts(accounts);
           }
         }
         else if (input == "w")
@@ -55,11 +61,17 @@ namespace Bank
           var withdraw = Console.ReadLine().ToLower();
           if (withdraw == "c")
           {
-
+            Console.WriteLine("how much would you like to withdraw from your checking account?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Subtracting("Checking", deposit);
+            SaveAccounts(accounts);
           }
           else if (withdraw == "s")
           {
-
+            Console.WriteLine("how much would you like to withdraw from your savings account?");
+            var deposit = double.Parse(Console.ReadLine());
+            accountsManager.Subtracting("Savings", deposit);
+            SaveAccounts(accounts);
           }
         }
         else if (input == "t")

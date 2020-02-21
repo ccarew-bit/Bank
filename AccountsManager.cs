@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bank
 {
@@ -14,9 +15,18 @@ namespace Bank
         Console.WriteLine($"You have {account.Amount} in your {account.AccountType}");
       }
     }
-    public void Adding(string AccountType, int Amount)
+    public void Adding(string AccountType, Double Amount)
     {
-
+      var account = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+      account += Amount;
+      accounts.First(accounts => accounts.AccountType == AccountType).Amount = account;
     }
+    public void Subtracting(string AccountType, Double Amount)
+    {
+      var account = accounts.First(accounts => accounts.AccountType == AccountType).Amount;
+      account -= Amount;
+      accounts.First(accounts => accounts.AccountType == AccountType).Amount = account;
+    }
+
   }
 }

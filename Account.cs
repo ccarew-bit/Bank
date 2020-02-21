@@ -1,3 +1,5 @@
+using System;
+
 namespace Bank
 {
   public class Account
@@ -5,6 +7,6 @@ namespace Bank
     // checking account
     public string AccountType { get; set; }
     //savings accout
-    public int Amount { get; set; }
+    public Double Amount { get; set; }
   }
 }

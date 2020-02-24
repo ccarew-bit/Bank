@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace Bank
 {
@@ -8,7 +11,21 @@ namespace Bank
   {
     public List<Account> accounts { get; set; } = new List<Account>();
 
-    public static void DisplayAccounts(List<Account> accounts)
+    public void LoadAccounts()
+    {
+      var reader = new StreamReader("accounts.csv");
+      var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+      accounts = csvReader.GetRecords<Account>().ToList();
+    }
+
+    public void SaveAccounts()
+    {
+      var writer = new StreamWriter("accounts.csv");
+      var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+      csvWriter.WriteRecords(accounts);
+      writer.Flush();
+    }
+    public void DisplayAccounts(List<Account> accounts)
     {
       foreach (var account in accounts)
       {
